@@ -1,0 +1,70 @@
+version: '3.7'
+
+networks:
+  laravel:
+    driver: bridge
+
+services:
+
+    # -----------  mysql  -------------
+
+  maes-mysql:
+    container_name: maes-mysql
+    image: mysql:5.7
+    volumes:
+        - ./logs/mysql/data:/var/lib/mysql
+        - ./logs/mysql/data:/var/log/mysql
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8 --collation-server=utf8_general_ci
+    restart: always
+    environment:
+        MYSQL_DATABASE: laraveldb
+        MYSQL_USER: userSoftmaes
+        MYSQL_PASSWORD: 6x9JG9N_/.gh956
+        MYSQL_ROOT_PASSWORD: 6x9JG9N_/.gh956
+        MYSQL_TCP_PORT: 3301
+    ports:
+        - "3301:3301"
+    expose:
+        - 3301
+    networks:
+      - laravel
+
+    # -----------  phpmyadmin  -------------
+
+  maes-phpmyadmin:
+    container_name: maes-phpmyadmin
+    image: phpmyadmin
+    depends_on:
+      - maes-mysql
+    restart: always
+    ports:
+      - 8086:80
+    environment:
+      PMA_HOST: maes-mysql
+      PMA_PORT: 3301
+      PMA_USER: userSoftmaes
+      PMA_PASSWORD: 6x9JG9N_/.gh956
+      MYSQL_ROOT_PASSWORD: 6x9JG9N_/.gh956
+      UPLOAD_LIMIT: 40M
+    networks:
+      - laravel
+
+    # -----------  my-laravel-app  -------------
+
+  maes-laravel-app:
+    container_name: maes-laravel-app
+    image: docker.io/bitnami/laravel:latest
+    ports:
+      - '8000:8000'
+    environment:
+      - DB_HOST=maes-mysql
+      - DB_PORT=3301
+      - DB_USERNAME=userSoftmaes
+      - DB_PASSWORD=6x9JG9N_/.gh956
+      - DB_DATABASE=laraveldb
+    volumes:
+      - './../../src:/app'
+    depends_on:
+      - maes-mysql
+    networks:
+      - laravel
