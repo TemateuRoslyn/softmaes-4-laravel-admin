@@ -1,2 +1,2 @@
 cd deployment/docker
-sh run.cabrel.sh
+sh run.first.cabrel.sh
