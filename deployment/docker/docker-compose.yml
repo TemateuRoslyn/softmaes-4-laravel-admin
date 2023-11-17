@@ -64,7 +64,7 @@ services:
       - DB_DATABASE=laraveldb
     volumes:
       - './../../src:/app'
-  # command: ["composer", "update"]
+    # command: ["composer", "update"]
     depends_on:
       - maes-mysql
     networks:
