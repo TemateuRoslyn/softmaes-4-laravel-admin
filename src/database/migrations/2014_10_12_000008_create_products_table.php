@@ -16,12 +16,12 @@ return new class extends Migration
         $table->integer('buying_price')->unsigned();
         $table->integer('selling_price')->unsigned();
         $table->integer('stock')->unsigned();
-        //$table->char('unit_id', 11);
+        //$table->char('unit_id');
         $table->string('product_image')->nullable();
         $table->timestamps();
 
-        $table->foreign('category_id')->references('id')->on('categories');
-        $table->foreign('unit_id')->references('id')->on('units');
+        //$table->foreign('category_id')->constrained()->onDelete('cascade');
+        //$table->foreign('unit_id')->constrained()->onDelete('cascade');
     });
 }
 public function down()

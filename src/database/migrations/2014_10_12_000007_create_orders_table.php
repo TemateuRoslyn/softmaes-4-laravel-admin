@@ -15,17 +15,17 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_date', 10);
-            //$table->string('customer_id', 10);
-            $table->string('order_status', 10);
-            $table->integer('total_products', 11);
-            $table->integer('sub_total', 11);
-            $table->integer('var', 11);
-            $table->integer('total', 11);
-            $table->integer('pay', 11);
-            $table->string('invoice_no', 10);
-            $table->string('payment_type', 10);
-            $table->integer('due', 11);
+            //$table->string('customer_id');
+            $table->string('order_date');
+            $table->string('order_status');
+            $table->integer('total_products');
+            $table->integer('sub_total');
+            $table->integer('vat');
+            $table->integer('total');
+            $table->string('invoice_no');
+            $table->string('payment_type');
+            $table->integer('pay');
+            $table->integer('due');
             $table->timestamps();
 
             $table->foreignId('customer_id')->constrained()->onDelete('cascade');
