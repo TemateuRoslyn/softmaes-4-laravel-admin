@@ -11,12 +11,12 @@ return new class extends Migration
     Schema::create('products', function (Blueprint $table) {
         $table->id();
         $table->string('product_name')->unique();
-        $table->integer('category_id')->unsigned();
+        //$table->integer('category_id')->unsigned();
         $table->char('product_code', 5)->unique();
         $table->integer('buying_price')->unsigned();
         $table->integer('selling_price')->unsigned();
         $table->integer('stock')->unsigned();
-        $table->char('unit_id', 11);
+        //$table->char('unit_id', 11);
         $table->string('product_image')->nullable();
         $table->timestamps();
 
